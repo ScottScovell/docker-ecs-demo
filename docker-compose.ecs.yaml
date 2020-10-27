@@ -1,10 +1,7 @@
 version: "3.7"
 services:
   backend:
-    build:
-      args:
-      - NODE_ENV=development
-      context: backend
+    image: 752419465350.dkr.ecr.us-east-1.amazonaws.com/docker-ecs-demo-backend:latest
     command: npm run start-watch
     environment:
       - DATABASE_DB=example-aws
@@ -21,9 +18,7 @@ services:
     networks:
       - public
   frontend:
-    build:
-      context: frontend
-      target: development
+    image: 752419465350.dkr.ecr.us-east-1.amazonaws.com/docker-ecs-demo-frontend:latest
     ports:
       - 3000:3000
     networks:
