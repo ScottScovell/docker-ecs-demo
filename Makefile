@@ -4,7 +4,7 @@ ECR_REPOSITORY=docker-ecs-demo
 # AWS provisioning
 # - ECR repository
 # - RDS MySQL database
-aws-provision:
+aws:
 	echo "Provisioning required AWS resources..."
 	aws ecr create-repository --repository-name ${ECR_REPOSITORY}-frontend
 	aws ecr create-repository --repository-name ${ECR_REPOSITORY}-backend
@@ -45,6 +45,6 @@ ecs-down:
 
 # Output resulting CloudFormation template
 ecs-convert:
-	docker --context ecs compose convert -f docker-compose.ecs.yaml up
+	docker --context ecs compose convert -f docker-compose.ecs.yaml
 
 clean:

@@ -4,19 +4,19 @@ services:
     image: 752419465350.dkr.ecr.us-east-1.amazonaws.com/docker-ecs-demo-backend:latest
     command: npm run start-watch
     environment:
-      - DATABASE_DB=example-aws
+      - DATABASE_DB=example_rds
       - DATABASE_USER=root
       - DATABASE_PASSWORD=/run/secrets/db-password
-      - DATABASE_HOST=example-aws.c9uz4aaw1jzb.ap-southeast-2.rds.amazonaws.com
-      - NODE_ENV=development
+      - DATABASE_HOST=example-rds.chdqlk4ehvae.us-east-1.rds.amazonaws.com
     ports:
-      - 80:80
+      - 8080:8080
       - 9229:9229
       - 9230:9230
     secrets:
       - db-password
     networks:
       - public
+      - private
   frontend:
     image: 752419465350.dkr.ecr.us-east-1.amazonaws.com/docker-ecs-demo-frontend:latest
     ports:
@@ -27,6 +27,7 @@ services:
       - backend
 networks:
   public:
+  private:
 secrets:
   db-password:
     file: db/password.txt
