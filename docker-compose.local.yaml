@@ -1,4 +1,5 @@
 version: "3.7"
+
 services:
   backend:
     build:
@@ -28,6 +29,7 @@ services:
       - private
     depends_on:
       - db
+
   db:
     image: mysql:8.0.19
     command: '--default-authentication-plugin=mysql_native_password'
@@ -41,6 +43,7 @@ services:
     environment:
       - MYSQL_DATABASE=example
       - MYSQL_ROOT_PASSWORD_FILE=/run/secrets/db-password
+
   frontend:
     build:
       context: frontend
@@ -54,12 +57,15 @@ services:
       - public
     depends_on:
       - backend
+
 networks:
   public:
   private:
+
 volumes:
   back-notused:
   db-data:
+
 secrets:
   db-password:
     file: db/password.txt

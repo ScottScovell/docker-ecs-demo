@@ -9,12 +9,13 @@ aws:
 	aws ecr create-repository --repository-name ${ECR_REPOSITORY}-frontend
 	aws ecr create-repository --repository-name ${ECR_REPOSITORY}-backend
 	aws rds create-db-instance \
-		--db-instance-identifier example-rds \
+		--db-instance-identifier db-rds \
 		--db-instance-class db.t3.micro \
 		--engine mysql \
 		--master-username root \
 		--master-user-password db-btf5q \
-		--allocated-storage 20
+		--allocated-storage 20 \
+		--db-name example_rds
 
 # Build docker images locally and up the dev environment
 dev-up:
