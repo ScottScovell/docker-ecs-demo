@@ -2,7 +2,7 @@ version: "3.7"
 
 services:
   backend:
-    image: 752419465350.dkr.ecr.us-east-1.amazonaws.com/docker-ecs-demo-backend:latest
+    image: <your aws account>.dkr.ecr.<your aws region>.amazonaws.com/docker-ecs-demo-backend:latest
     command: npm run start-watch
     environment:
       - DATABASE_DB=example
@@ -35,7 +35,7 @@ services:
       - MYSQL_ROOT_PASSWORD_FILE=/run/secrets/db-password
 
   frontend:
-    image: 752419465350.dkr.ecr.us-east-1.amazonaws.com/docker-ecs-demo-frontend:latest
+    image: <your aws account>.dkr.ecr.<your aws region>.amazonaws.com/docker-ecs-demo-frontend:latest
     ports:
       - 3000:3000
     networks:

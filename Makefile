@@ -1,33 +1,20 @@
 # Demo Provisioning 
 ECR_REPOSITORY=docker-ecs-demo
-ACCOUNT=752419465350
-REGION=us-east-1
+ACCOUNT=<your aws account>
+REGION=<your aws region>
 
-# AWS provisioning
-# - ECR repositories
-# - RDS MySQL database
+# Provision supporting AWS resources...
 aws:
-	echo "Provisioning supporting AWS resources..."
 	aws ecr create-repository --repository-name ${ECR_REPOSITORY}-frontend
 	aws ecr create-repository --repository-name ${ECR_REPOSITORY}-backend
-	aws rds create-db-instance \
-		--db-instance-identifier db-rds \
-		--db-instance-class db.t3.micro \
-		--engine mysql \
-		--master-username root \
-		--master-user-password db-btf5q \
-		--allocated-storage 20 \
-		--db-name example_rds
 
 # Build docker images locally and up the dev environment
 dev-up:
 	docker-compose --context default -f docker-compose.local.yaml up --build -d
-	#docker --context default compose -f docker-compose.local.yaml up -d
 
 # Tear down the dev environment
 dev-down:
 	docker-compose --context default -f docker-compose.local.yaml down
-	#docker --context default compose -f docker-compose.local.yaml down
 
 # Push latest images to ECR and up the ECS environment
 ecs-up:
@@ -52,10 +39,5 @@ ecs-convert:
 
 # Clean up supporting AWS resources
 clean:
-	echo "Cleaning up supporting AWS resources..."
 	aws ecr delete-repository --repository-name ${ECR_REPOSITORY}-frontend --force
 	aws ecr delete-repository --repository-name ${ECR_REPOSITORY}-backend --force
-	aws rds delete-db-instance \
-		--db-instance-identifier db-rds \
-		--skip-final-snapshot \
-		--delete-automated-backups
