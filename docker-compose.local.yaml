@@ -13,10 +13,9 @@ services:
       - DATABASE_PASSWORD=/run/secrets/db-password
       - DATABASE_HOST=db
       - NODE_ENV=development
+      - PORT=80
     ports:
       - 80:80
-      - 9229:9229
-      - 9230:9230
     secrets:
       - db-password
     volumes:
